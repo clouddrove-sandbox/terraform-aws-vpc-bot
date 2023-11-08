@@ -15,7 +15,7 @@ jobs:
         uses: pascalgn/automerge-action@v0.13.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          label: "dependabot"
+          label: "dependabot/patch"
           method: "merge"
 
 
