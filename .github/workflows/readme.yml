@@ -21,9 +21,9 @@ jobs:
         uses: 'clouddrove/github-actions@9.0.3'
         with:
           actions_subcommand: 'readme'
-          github_token: '${{ secrets.GITHUB }}'
+          GITHUB_TOKEN: "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"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: "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"
 
       - name: 'pre-commit check errors'
         uses: pre-commit/action@v3.0.0
@@ -39,7 +39,7 @@ jobs:
         with:
           actions_subcommand: 'push'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: "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"
 
       - name: 'Slack Notification'
         uses: clouddrove/action-slack@v2
@@ -48,6 +48,6 @@ jobs:
           fields: repo,author
           author_name: 'CloudDrove'
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # required
+          GITHUB_TOKEN: "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"
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_TERRAFORM }} # required
         if: always()
