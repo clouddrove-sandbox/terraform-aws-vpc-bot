@@ -13,12 +13,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-#      - name: Auto-Merge PR
-#        uses: pascalgn/automerge-action@v0.13.1
-#        with:
-#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#          label: "dependabot/patch"
-#          method: "merge"
+      - name: Auto-Merge PR
+        uses: pascalgn/automerge-action@v0.13.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          label: "dependabot/patch"
+          method: "merge"
 
 
 #name: Dependabot auto-merge
