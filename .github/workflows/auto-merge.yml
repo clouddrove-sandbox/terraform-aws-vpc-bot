@@ -14,7 +14,7 @@ jobs:
       - name: Auto-Merge PR
         uses: pascalgn/automerge-action@v0.13
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
           label: "dependabot/patch"
           method: "merge"
 
