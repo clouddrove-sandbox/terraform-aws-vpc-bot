@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Auto-Merge PR
-        uses: pascalgn/automerge-action@main
+        uses: pascalgn/automerge-action@v1
         with:
           GITHUB_TOKEN: "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"
           label: "dependabot/patch"
