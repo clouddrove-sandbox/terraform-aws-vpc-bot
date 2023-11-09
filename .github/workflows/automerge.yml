@@ -33,5 +33,5 @@ jobs:
           MERGE_DELETE_BRANCH: "true"
           MERGE_LABELS: "automerge,dependencies"
           MERGE_REQUIRED_APPROVALS: "0"
-          MERGE_READY_STATE: "unknown"
+#          MERGE_READY_STATE: "unknown"
           MERGE_RETRY_SLEEP: "10000"
