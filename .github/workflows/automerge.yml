@@ -24,9 +24,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Updating GitHub Token
-          env:
-            GITHUB_TOKEN: ${{ secrets.TOKEN }}
-          run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
       - name: checkout
         uses: actions/checkout@master
         with:
