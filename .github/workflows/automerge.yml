@@ -29,5 +29,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_FILTER_AUTHOR: "theprashantyadav"
-          MERGE_METHOD: "squash"
+          MERGE_METHOD: "automerge"
           MERGE_DELETE_BRANCH: "true"
