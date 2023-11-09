@@ -32,14 +32,3 @@ jobs:
           MERGE_METHOD: "merge"
           MERGE_DELETE_BRANCH: "true"
           MERGE_LABELS: "dependencies"
-
-#      - name: Merge if branch can be merged automatically
-#        if: steps.check-merge.outputs.mergeable == 'true'
-#        run: |
-#          echo "Merging the pull request."
-#          git config --global user.email "github-actions@github.com"
-#          git config --global user.name "GitHub Actions"
-#          git checkout -b auto-merge-branch ${{ github.event.pull_request.base.sha }}
-#          git merge --no-edit ${{ github.event.pull_request.head.sha }}
-#          git push origin auto-merge-branch
-#        shell: bash
