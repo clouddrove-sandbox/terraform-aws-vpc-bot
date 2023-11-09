@@ -17,8 +17,8 @@ on:
     types:
       - completed
   status: {}
-#  check_run:
-#      types: [ rerequested, completed ]
+  check_run:
+      types: [ rerequested, completed ]
 
 jobs:
   automerge:
