@@ -407,7 +407,3 @@ resource "aws_default_network_acl" "default" {
     }
   )
 }
-
-
-
-
