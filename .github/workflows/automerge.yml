@@ -17,6 +17,9 @@ on:
     types:
       - completed
   status: {}
+  check_run:
+      types: [ rerequested, completed ]
+
 jobs:
   automerge:
     runs-on: ubuntu-latest
