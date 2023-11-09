@@ -23,6 +23,16 @@ jobs:
   automerge:
     runs-on: ubuntu-latest
     steps:
+      - name: Updating GitHub Token
+          env:
+            GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          run: echo "GH_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+      - name: checkout
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 0
+          ref: master
+          token: ${{ env.GH_TOKEN }}
       - id: automerge
         name: automerge
         uses: pascalgn/automerge-action@v0.15.6
@@ -33,5 +43,3 @@ jobs:
           MERGE_DELETE_BRANCH: "true"
           MERGE_LABELS: "automerge,dependencies"
           MERGE_REQUIRED_APPROVALS: "0"
-#          MERGE_READY_STATE: "unstable"
-#          MERGE_RETRY_SLEEP: "10000"
