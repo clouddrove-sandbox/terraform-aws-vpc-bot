@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@master
         with:
           fetch-depth: 0
-          ref: master
+#          ref: master
           token: ${{ env.GH_TOKEN }}
       - id: automerge
         name: automerge
