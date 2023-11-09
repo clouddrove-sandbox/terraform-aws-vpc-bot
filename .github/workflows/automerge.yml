@@ -30,9 +30,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
           MERGE_FILTER_AUTHOR: "theprashantyadav"
           MERGE_METHOD: "merge"
-          UPDATE_LABELS: "automerge"
+#          UPDATE_LABELS: "automerge"
           MERGE_DELETE_BRANCH: "true"
           MERGE_LABELS: "automerge,dependencies"
           MERGE_REQUIRED_APPROVALS: "0"
+          UPDATE_LABELS: { required: [ 'automerge' ], blocking: [] },
 #          MERGE_READY_STATE: "unstable"
 #          MERGE_RETRY_SLEEP: "10000"
