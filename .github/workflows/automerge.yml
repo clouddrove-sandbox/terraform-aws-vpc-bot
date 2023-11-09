@@ -31,6 +31,8 @@ jobs:
           MERGE_FILTER_AUTHOR: "theprashantyadav"
           MERGE_METHOD: "merge"
           MERGE_DELETE_BRANCH: "true"
+          MERGE_LABELS: "dependencies"
+
 #      - name: Merge if branch can be merged automatically
 #        if: steps.check-merge.outputs.mergeable == 'true'
 #        run: |
