@@ -28,6 +28,6 @@ jobs:
         uses: pascalgn/automerge-action@v0.15.6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MERGE_FILTER_AUTHOR: "clouddrove-sandbox/https://github.com/clouddrove-sandbox/terraform-aws-vpc-bot"
+          MERGE_FILTER_AUTHOR: "theprashantyadav"
           MERGE_METHOD: "automerge"
           MERGE_DELETE_BRANCH: "true"
