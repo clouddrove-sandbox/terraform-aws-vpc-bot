@@ -27,17 +27,11 @@ jobs:
         name: automerge
         uses: pascalgn/automerge-action@v0.15.6
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
           MERGE_FILTER_AUTHOR: "theprashantyadav"
           MERGE_METHOD: "merge"
           MERGE_DELETE_BRANCH: "true"
-#      - name: Merge if branch can be merged automatically
-#        if: steps.check-merge.outputs.mergeable == 'true'
-#        run: |
-#          echo "Merging the pull request."
-#          git config --global user.email "github-actions@github.com"
-#          git config --global user.name "GitHub Actions"
-#          git checkout -b auto-merge-branch ${{ github.event.pull_request.base.sha }}
-#          git merge --no-edit ${{ github.event.pull_request.head.sha }}
-#          git push origin auto-merge-branch
-#        shell: bash
+          MERGE_LABELS: "automerge,dependencies"
+          MERGE_REQUIRED_APPROVALS: "0"
+
+
