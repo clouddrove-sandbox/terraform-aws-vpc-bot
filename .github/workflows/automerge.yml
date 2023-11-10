@@ -27,11 +27,10 @@ jobs:
         name: automerge
         uses: pascalgn/automerge-action@v0.15.6
         env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_FILTER_AUTHOR: "theprashantyadav"
           MERGE_METHOD: "merge"
           MERGE_DELETE_BRANCH: "true"
           MERGE_LABELS: "automerge,dependencies"
-          MERGE_REQUIRED_APPROVALS: "0"
-
+          MERGE_REQUIRED_APPROVALS: "1"
 
