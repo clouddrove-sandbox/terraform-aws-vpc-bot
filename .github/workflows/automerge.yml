@@ -26,12 +26,11 @@ jobs:
       - id: automerge
         name: automerge
         uses: pascalgn/automerge-action@v0.15.6
+#        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MERGE_FILTER_AUTHOR: "theprashantyadav"
+          MERGE_FILTER_AUTHOR: 'dependabot[bot]'
           MERGE_METHOD: "merge"
           MERGE_DELETE_BRANCH: "true"
-          MERGE_LABELS: "automerge,dependencies"
+          MERGE_LABELS: "dependencies"
           MERGE_REQUIRED_APPROVALS: "1"
-
-
