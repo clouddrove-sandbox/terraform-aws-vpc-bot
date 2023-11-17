@@ -32,5 +32,4 @@ jobs:
           MERGE_METHOD: "merge"
           MERGE_DELETE_BRANCH: "true"
           MERGE_LABELS: "automerge,dependencies"
-          MERGE_REQUIRED_APPROVALS: "1"
-
+          MERGE_REQUIRED_APPROVALS: "2"
