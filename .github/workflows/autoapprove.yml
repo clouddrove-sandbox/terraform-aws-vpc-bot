@@ -6,12 +6,12 @@ permissions:
   pull-requests: write
 jobs:
   autoapprove:
-    name: Auto Approve a PR by theprashantyadav
+    name: Auto Approve a PR by dependabot
     runs-on: ubuntu-latest
     steps:
       - name: Auto approve
         uses: hmarr/auto-approve-action@v2.0.0
-        # Perform the auto approve action only when the PR is raised by dependabot
-        if: github.actor == 'theprashantyadav' || github.actor == 'theprashantyadav-preview'
+#        # Perform the auto approve action only when the PR is raised by dependabot
+#        if: github.actor == 'dependabot[bot]' || github.actor == 'dependabot-preview[bot]'
         with:
           github-token: '${{ secrets.GITHUB }}'
