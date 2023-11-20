@@ -14,4 +14,4 @@ jobs:
         # Perform the auto approve action only when the PR is raised by dependabot
         if: github.actor == 'theprashantyadav'
         with:
-          github-token: ${{ secrets.TOKEN }}
+          github-token: ${{ secrets.AUTOMERGE }}
