@@ -10,13 +10,6 @@ on:
       - ready_for_review
       - reopened
       - unlocked
-  pull_request_review:
-    types:
-      - submitted
-  check_suite:
-    types:
-      - completed
-  status: {}
   check_run:
       types: [ rerequested, completed ]
 jobs:
@@ -31,5 +24,7 @@ jobs:
           MERGE_FILTER_AUTHOR: 'theprashantyadav'
           MERGE_METHOD: "merge"
           MERGE_DELETE_BRANCH: "true"
-          MERGE_LABELS: "dependencies"
-          MERGE_REQUIRED_APPROVALS: "1"
+          MERGE_LABELS: "dependencies,automerge"
+#          MERGE_REQUIRED_APPROVALS: ""
+
+
