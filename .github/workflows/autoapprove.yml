@@ -12,7 +12,7 @@ jobs:
       - name: Auto approve
         uses: hmarr/auto-approve-action@v3.2.1
         # Perform the auto approve action only when the PR is raised by dependabot
-        if: github.actor == 'theprashantyadav' || github.actor == 'theprashantyadav'
+        if: github.actor == 'h1manshu98' || github.actor == 'theprashantyadav'
         with:
           github-token: ${{ secrets.GITHUB_ACTIONS_TOKEN }}
 
