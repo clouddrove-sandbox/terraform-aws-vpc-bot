@@ -10,8 +10,6 @@ on:
       - ready_for_review
       - reopened
       - unlocked
-  check_run:
-      types: [ rerequested, completed ]
 jobs:
   automerge:
     runs-on: ubuntu-latest
