@@ -2,24 +2,8 @@ name: Auto approve and merge PRs by dependabot
 
 on:
   pull_request:
-    types:
-      - labeled
-      - unlabeled
-      - synchronize
-      - opened
-      - edited
-      - ready_for_review
-      - reopened
-      - unlocked
-  pull_request_review:
-    types:
-      - submitted
-  check_suite:
-    types:
-      - completed
-  status: {}
   check_run:
-    types: [ completed ]
+    types: [rerequested, completed]
 
 jobs:
   autoapprove:
