@@ -1,9 +1,9 @@
 name: Auto approve and merge PRs by dependabot
 
 on: pull_request
-
-permissions:
-  pull-requests: write
+#
+#permissions:
+#  pull-requests: write
 jobs:
   autoapprove:
     name: Auto Approve a PR by dependabot
@@ -15,8 +15,6 @@ jobs:
         if: github.actor == 'theprashantyadav'
         with:
           github-token: ${{ secrets.AUTOMERGE }}
-
-
 automerge:
    name: Auto merge after successful checks
    needs: autoapprove
