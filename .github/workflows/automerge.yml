@@ -20,7 +20,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           # merge only dependabot PR
-        env:
+      - env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_FILTER_AUTHOR: 'theprashantyadav'
           MERGE_METHOD: "merge"
