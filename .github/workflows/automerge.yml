@@ -1,21 +1,26 @@
-name: automerge
-on:
-  pull_request:
-    types:
-      - labeled
-      - unlabeled
-      - synchronize
-      - opened
-      - edited
-      - ready_for_review
-      - reopened
-      - unlocked
-  check_run:
-      types: [ completed ]
+name: Auto approve and merge PRs by dependabot
+
+on: pull_request
+
+permissions:
+  pull-requests: write
 jobs:
-  automerge:
+  autoapprove:
+    name: Auto Approve a PR by dependabot
     runs-on: ubuntu-latest
     steps:
+      - name: Auto approve
+        uses: hmarr/auto-approve-action@v3.2.1
+        # Perform the auto approve action only when the PR is raised by dependabot
+        if: github.actor == 'theprashantyadav'
+        with:
+          github-token: ${{ secrets.AUTOMERGE }}
+
+automerge:
+   name: Auto merge after successful checks
+   needs: autoapprove
+   runs-on: ubuntu-latest
+   steps:
       - id: automerge
         name: automerge
         uses: pascalgn/automerge-action@v0.15.6
