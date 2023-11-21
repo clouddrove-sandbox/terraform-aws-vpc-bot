@@ -16,6 +16,7 @@ jobs:
         with:
           github-token: ${{ secrets.AUTOMERGE }}
 
+
 automerge:
    name: Auto merge after successful checks
    needs: autoapprove
