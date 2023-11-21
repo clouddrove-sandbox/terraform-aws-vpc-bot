@@ -5,9 +5,6 @@ on:
   check_run:
     types: [ completed ]
 
-permissions:
-  pull-requests: write
-
 jobs:
   autoapprove:
     name: Auto Approve and automerge PR by dependabot
@@ -19,9 +16,9 @@ jobs:
         if: github.actor == 'theprashantyadav'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          # merge only dependabot PR
-      - id: automerge
-        name: automerge
+
+        # merge only dependabot PR
+      - name: automerge
         uses: pascalgn/automerge-action@v0.15.6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
