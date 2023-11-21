@@ -17,6 +17,8 @@ jobs:
     name: Auto merge after successful checks
     needs: autoapprove
     runs-on: ubuntu-latest
+    check_run:
+      types: [ completed ]
     steps:
       - id: automerge
         name: automerge
