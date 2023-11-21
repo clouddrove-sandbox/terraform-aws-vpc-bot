@@ -29,6 +29,7 @@ jobs:
         # merge only dependabot PR
       - name: automerge
         uses: pascalgn/automerge-action@v0.15.6
+        if: github.event_name == 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_FILTER_AUTHOR: 'theprashantyadav'
