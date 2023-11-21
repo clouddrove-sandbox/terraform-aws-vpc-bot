@@ -12,7 +12,7 @@ jobs:
         if: github.actor == 'theprashantyadav'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      id: automerge
+      - id: automerge
         name: automerge
         uses: pascalgn/automerge-action@v0.15.6
         env:
