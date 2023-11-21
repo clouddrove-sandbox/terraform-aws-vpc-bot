@@ -12,12 +12,6 @@ jobs:
         if: github.actor == 'theprashantyadav'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-
-  automerge:
-    name: Auto merge after successful checks
-    needs: autoapprove
-    runs-on: ubuntu-latest
-    steps:
       - id: automerge
         name: automerge
         uses: pascalgn/automerge-action@v0.15.6
@@ -25,6 +19,22 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_FILTER_AUTHOR: 'theprashantyadav'
           MERGE_METHOD: "merge"
-          MERGE_DELETE_BRANCH: "false"
+          MERGE_DELETE_BRANCH: "true"
           MERGE_LABELS: "dependencies,automerge"
           MERGE_REQUIRED_APPROVALS: "1"
+#
+#  automerge:
+#    name: Auto merge after successful checks
+#    needs: autoapprove
+#    runs-on: ubuntu-latest
+#    steps:
+#      - id: automerge
+#        name: automerge
+#        uses: pascalgn/automerge-action@v0.15.6
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#          MERGE_FILTER_AUTHOR: 'theprashantyadav'
+#          MERGE_METHOD: "merge"
+#          MERGE_DELETE_BRANCH: "true"
+#          MERGE_LABELS: "dependencies,automerge"
+#          MERGE_REQUIRED_APPROVALS: "1"
