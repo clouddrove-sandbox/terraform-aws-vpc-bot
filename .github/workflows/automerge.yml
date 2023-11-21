@@ -15,7 +15,6 @@ on:
     types: [ completed ]
 jobs:
   autoapprove:
-  automerge:
     name: Auto Approve and automerge PR by dependabot
     runs-on: ubuntu-latest
     steps:
