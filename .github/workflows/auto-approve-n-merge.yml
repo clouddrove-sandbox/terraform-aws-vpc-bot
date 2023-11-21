@@ -12,11 +12,11 @@ jobs:
         if: github.actor == 'theprashantyadav'
         with:
           github-token: ${{ secrets.AUTOMERGE }}
-automerge:
-   name: Auto merge after successful checks
-   needs: autoapprove
-   runs-on: ubuntu-latest
-   steps:
+  automerge:
+    name: Auto merge after successful checks
+    needs: autoapprove
+    runs-on: ubuntu-latest
+    steps:
       - id: automerge
         name: automerge
         uses: pascalgn/automerge-action@v0.15.6
