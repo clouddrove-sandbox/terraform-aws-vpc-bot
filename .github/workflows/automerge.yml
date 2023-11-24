@@ -12,24 +12,27 @@ on:
       - reopened
       - unlocked
   check_run:
-    types: [rerequested, completed]
+    types:
+      - completed
 
 jobs:
   autoapprove:
-    name: Auto Approve and automerge PR by dependabot
+    name: Auto Approve a PR by dependabot
     runs-on: ubuntu-latest
     steps:
       - name: Auto approve
         uses: hmarr/auto-approve-action@v3.2.1
         # Perform the auto approve action only when the PR is raised by dependabot
-        if: github.actor == 'theprashantyadav' && github.event_name == 'pull_request'
+        if: github.actor == 'theprashantyadav'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-        # merge only dependabot PR
-      - name: automerge
+  automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - id: automerge
+        name: automerge
         uses: pascalgn/automerge-action@v0.15.6
-        if: github.event_name == 'pull_request'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_FILTER_AUTHOR: 'theprashantyadav'
@@ -37,3 +40,5 @@ jobs:
           MERGE_DELETE_BRANCH: "true"
           MERGE_LABELS: "dependencies,automerge"
           MERGE_REQUIRED_APPROVALS: "1"
+
+
