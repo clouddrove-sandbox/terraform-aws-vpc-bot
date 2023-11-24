@@ -3,8 +3,7 @@ name: Auto approve and merge PRs by dependabot
 on:
   pull_request:
   check_run:
-    types:
-      [ completed]
+    types: [ completed]
 
 permissions:
   pull-requests: write-all
