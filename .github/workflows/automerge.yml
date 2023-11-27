@@ -80,7 +80,7 @@ jobs:
     #         exit 1
     #       fi
     #     env:
-    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
 
     #   - name: Automerge if checks pass
     #     if: steps.check-status.run.result == 'success'
