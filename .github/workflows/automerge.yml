@@ -17,6 +17,8 @@ name: Test Auto Merge
 
 on:
   pull_request:
+    branches:
+      - main
     types:
       - labeled
       - unlabeled
