@@ -1,4 +1,4 @@
-name: Auto approve and merge PRs by dependabot
+name: Test Auto Merge
 
 # on:
 #   pull_request:
@@ -17,6 +17,8 @@ name: Auto approve and merge PRs by dependabot
 
 on:
   pull_request:
+    branches:
+      - main
     types:
       - labeled
       - unlabeled
