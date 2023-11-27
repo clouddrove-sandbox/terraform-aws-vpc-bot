@@ -33,11 +33,11 @@ on:
     types:
       - completed
   status: {}
-  workflow_dispatch:
-    inputs: 
-      pullRequestNumber:
-        description: Pull request number to auto-approve
-        required: false
+  # workflow_dispatch:
+  #   inputs: 
+  #     pullRequestNumber:
+  #       description: Pull request number to auto-approve
+  #       required: false
 
 jobs:
   auto-approve:
@@ -52,10 +52,11 @@ jobs:
         uses: hmarr/auto-approve-action@v3.2.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          pull-request-number: ${{ github.event.inputs.pullRequestNumber }}
+          # pull-request-number: ${{ github.event.inputs.pullRequestNumber }}
 
   auto-merge:  
     runs-on: ubuntu-latest
+    needs: auto-approve
     steps:
       - id: automerge
         name: automerge
