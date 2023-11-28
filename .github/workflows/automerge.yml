@@ -1,7 +1,24 @@
-name: Test Auto Merge
+# name: Test Auto Merge
+
+# # on:
+# #   pull_request:
+# #     types:
+# #       - labeled
+# #       - unlabeled
+# #       - synchronize
+# #       - opened
+# #       - edited
+# #       - ready_for_review
+# #       - reopened
+# #       - unlocked
+# #   check_run:
+# #     types:
+# #       - [ completed ]
 
 # on:
 #   pull_request:
+#     branches:
+#       - main
 #     types:
 #       - labeled
 #       - unlabeled
@@ -11,14 +28,105 @@ name: Test Auto Merge
 #       - ready_for_review
 #       - reopened
 #       - unlocked
+#   pull_request_review:
+#     types:
+#       - submitted
 #   check_run:
 #     types:
-#       - [ completed ]
+#       - completed
+#   status: {}
+#   # workflow_dispatch:
+#   #   inputs: 
+#   #     pullRequestNumber:
+#   #       description: Pull request number to auto-approve
+#   #       required: false
+
+# jobs:
+#   auto-approve:
+#     name: Auto Approve a PR by dependabot
+#     runs-on: ubuntu-latest
+#     permissions:
+#       pull-requests: write
+#      # Perform the auto approve action only when the PR is raised by dependabot 
+#     if: github.actor == 'cloudlovely'
+#     steps:
+#       - name: Auto approve
+#         uses: hmarr/auto-approve-action@v3.2.1
+#         with:
+#           github-token: ${{ secrets.GITHUB_TOKEN }}
+#           # pull-request-number: ${{ github.event.inputs.pullRequestNumber }}
+
+#   auto-merge:  
+#     runs-on: ubuntu-latest
+#     needs: auto-approve
+#     # steps:
+#     #   - id: automerge
+#     #     name: automerge
+#     #     uses: pascalgn/automerge-action@v0.15.6
+#     #     env:
+#     #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#     #       MERGE_FILTER_AUTHOR: 'cloudlovely'
+#     #       MERGE_METHOD: "merge"
+#     #       MERGE_DELETE_BRANCH: "true"
+#     #       MERGE_LABELS: "automerge"
+#     #       MERGE_REQUIRED_APPROVALS: "1"
+#     # steps:
+#     #   - name: Check if all status checks are successful
+#     #     id: check-status
+#     #     run: |
+#     #       PR_STATUS=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+#     #       -H "Accept: application/vnd.github.v3+json" \
+#     #       https://api.github.com/repos/${{ github.repository }}/commits/${{ github.event.pull_request.head.sha }}/status)
+
+#     #       if echo "$PR_STATUS" | jq -e '.statuses[] | select(.state != "success" and .context != "automerge")' > /dev/null; then
+#     #         echo "At least one check failed or pending, aborting merge."
+#     #         exit 1
+#     #       fi
+#     #     env:
+#     #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
+
+#     #   - name: Automerge if checks pass
+#     #     if: steps.check-status.run.result == 'success'
+#     #     uses: "pascalgn/automerge-action@v0.15.6"
+#     #     env:
+#     #       GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}" 
+#     #       MERGE_FILTER_AUTHOR: 'cloudlovely'
+#     #       MERGE_METHOD: "merge"
+#     #       MERGE_DELETE_BRANCH: "true"
+#     #       MERGE_LABELS: "automerge"
+#     #       MERGE_REQUIRED_APPROVALS: "1"
+
+#     steps:
+#     - name: Check required checks
+#       uses: actions/github-script@v6
+#       id: check-status
+#       with:
+#         github-token: ${{ secrets.GITHUB_TOKEN }}
+#         script: |
+#           const requiredChecks = context.repo.pull.statuses.filter(check => check.context === 'required');
+#           const failedChecks = requiredChecks.filter(check => check.state === 'failure');
+#           if (failedChecks.length > 0) {
+#             console.log('Failed checks:');
+#             failedChecks.forEach(check => console.log(check.context, check.state, check.description));
+#             setFailed('Failed checks found.');
+#           }
+
+#     - name: Automerge
+#       uses: pascalgn/automerge-action@v0.15.6
+#       env:
+#         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         MERGE_FILTER_AUTHOR: 'cloudlovely'
+#         MERGE_METHOD: "merge"
+#         MERGE_DELETE_BRANCH: "true"
+#         MERGE_LABELS: "automerge"
+#         MERGE_REQUIRED_APPROVALS: "1"
+#       if: ${{ steps.check-status.outcome == 'true' }}
+
+
+name: Automerge release bump PR
 
 on:
   pull_request:
-    branches:
-      - main
     types:
       - labeled
       - unlabeled
@@ -31,95 +139,34 @@ on:
   pull_request_review:
     types:
       - submitted
-  check_run:
+  check_suite: 
     types:
       - completed
   status: {}
-  # workflow_dispatch:
-  #   inputs: 
-  #     pullRequestNumber:
-  #       description: Pull request number to auto-approve
-  #       required: false
 
 jobs:
-  auto-approve:
-    name: Auto Approve a PR by dependabot
+
+  autoapprove:
     runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
-     # Perform the auto approve action only when the PR is raised by dependabot 
-    if: github.actor == 'cloudlovely'
     steps:
-      - name: Auto approve
-        uses: hmarr/auto-approve-action@v3.2.1
+      - name: Autoapproving
+        uses: hmarr/auto-approve-action@v2.0.0
+        if: github.actor == 'cloudlovely'
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          # pull-request-number: ${{ github.event.inputs.pullRequestNumber }}
+          github-token: "${{ secrets.GITHUB_TOKEN }}"
 
-  auto-merge:  
+  automerge:
+    needs: [autoapprove]
     runs-on: ubuntu-latest
-    needs: auto-approve
-    # steps:
-    #   - id: automerge
-    #     name: automerge
-    #     uses: pascalgn/automerge-action@v0.15.6
-    #     env:
-    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    #       MERGE_FILTER_AUTHOR: 'cloudlovely'
-    #       MERGE_METHOD: "merge"
-    #       MERGE_DELETE_BRANCH: "true"
-    #       MERGE_LABELS: "automerge"
-    #       MERGE_REQUIRED_APPROVALS: "1"
-    # steps:
-    #   - name: Check if all status checks are successful
-    #     id: check-status
-    #     run: |
-    #       PR_STATUS=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-    #       -H "Accept: application/vnd.github.v3+json" \
-    #       https://api.github.com/repos/${{ github.repository }}/commits/${{ github.event.pull_request.head.sha }}/status)
-
-    #       if echo "$PR_STATUS" | jq -e '.statuses[] | select(.state != "success" and .context != "automerge")' > /dev/null; then
-    #         echo "At least one check failed or pending, aborting merge."
-    #         exit 1
-    #       fi
-    #     env:
-    #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-
-    #   - name: Automerge if checks pass
-    #     if: steps.check-status.run.result == 'success'
-    #     uses: "pascalgn/automerge-action@v0.15.6"
-    #     env:
-    #       GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}" 
-    #       MERGE_FILTER_AUTHOR: 'cloudlovely'
-    #       MERGE_METHOD: "merge"
-    #       MERGE_DELETE_BRANCH: "true"
-    #       MERGE_LABELS: "automerge"
-    #       MERGE_REQUIRED_APPROVALS: "1"
-
     steps:
-    - name: Check required checks
-      uses: actions/github-script@v6
-      id: check-status
-      with:
-        githubToken: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const requiredChecks = context.repo.pull.statuses.filter(check => check.context === 'required');
-          const failedChecks = requiredChecks.filter(check => check.state === 'failure');
-          if (failedChecks.length > 0) {
-            console.log('Failed checks:');
-            failedChecks.forEach(check => console.log(check.context, check.state, check.description));
-            setFailed('Failed checks found.');
-          }
-
-    - name: Automerge
-      uses: pascalgn/automerge-action@v0.15.6
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        MERGE_FILTER_AUTHOR: 'cloudlovely'
-        MERGE_METHOD: "merge"
-        MERGE_DELETE_BRANCH: "true"
-        MERGE_LABELS: "automerge"
-        MERGE_REQUIRED_APPROVALS: "1"
-      if: ${{ steps.check-status.outcome == 'true' }}
-
-
+      - name: Automerging
+        uses: pascalgn/automerge-action@v0.7.5
+        if: github.actor == 'cloudlovely'
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          GITHUB_LOGIN: asyncapi-bot
+          MERGE_LABELS: ""
+          MERGE_METHOD: "squash"
+          MERGE_COMMIT_MESSAGE: "pull-request-title"
+          MERGE_RETRIES: "10"
+          MERGE_RETRY_SLEEP: "10000"
