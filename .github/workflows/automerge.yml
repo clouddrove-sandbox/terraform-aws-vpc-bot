@@ -55,11 +55,10 @@ jobs:
     needs: auto-approve
     steps:
     - name: Get Status of current ref
-        id: get-status
-        uses: danieldeichfuss/get-status@v0
-        with:
-          ref: ${{ github.sha }}
-
+      id: get-status
+      uses: danieldeichfuss/get-status@v0
+      with:
+        ref: ${{ github.sha }}
     - name: Automerge
       uses: pascalgn/automerge-action@v0.15.6
       env:
