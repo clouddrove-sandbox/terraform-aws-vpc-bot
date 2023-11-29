@@ -35,11 +35,6 @@ on:
     types:
       - completed
   status: {}
-  # workflow_dispatch:
-  #   inputs: 
-  #     pullRequestNumber:
-  #       description: Pull request number to auto-approve
-  #       required: false
 
 jobs:
   auto-approve:
@@ -54,11 +49,29 @@ jobs:
         uses: hmarr/auto-approve-action@v3.2.1
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          # pull-request-number: ${{ github.event.inputs.pullRequestNumber }}
 
   auto-merge:  
     runs-on: ubuntu-latest
     needs: auto-approve
+    steps:
+    - name: Get Status of current ref
+        id: get-status
+        uses: danieldeichfuss/get-status@v0
+        with:
+          ref: ${{ github.sha }}
+
+    - name: Automerge
+      uses: pascalgn/automerge-action@v0.15.6
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        MERGE_FILTER_AUTHOR: 'cloudlovely'
+        MERGE_METHOD: "merge"
+        MERGE_DELETE_BRANCH: "true"
+        MERGE_LABELS: "automerge"
+        MERGE_REQUIRED_APPROVALS: "1"
+      if: ${{steps.get-status.outputs.all-checks-completed == 'true' &&  steps.get-status.outputs.all-checks-passed == 'true'}}
+
+
     # steps:
     #   - id: automerge
     #     name: automerge
@@ -96,30 +109,19 @@ jobs:
     #       MERGE_LABELS: "automerge"
     #       MERGE_REQUIRED_APPROVALS: "1"
 
-    steps:
-    - name: Check required checks
-      uses: actions/github-script@v6
-      id: check-status
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }}
-        script: |
-          const requiredChecks = context.repo.pull.status.filter(check => check.context === 'required');
-          const failedChecks = requiredChecks.filter(check => check.state === 'failure');
-          if (failedChecks.length > 0) {
-            console.log('Failed checks:');
-            failedChecks.forEach(check => console.log(check.context, check.state, check.description));
-            setFailed('Failed checks found.');
-          }
-
-    - name: Automerge
-      uses: pascalgn/automerge-action@v0.15.6
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        MERGE_FILTER_AUTHOR: 'cloudlovely'
-        MERGE_METHOD: "merge"
-        MERGE_DELETE_BRANCH: "true"
-        MERGE_LABELS: "automerge"
-        MERGE_REQUIRED_APPROVALS: "1"
-      if: ${{ steps.check-status.outcome == 'true' }}
+    # steps:
+    # - name: Check required checks
+    #   uses: actions/github-script@v6
+    #   id: check-status
+    #   with:
+    #     github-token: ${{ secrets.GITHUB_TOKEN }}
+    #     script: |
+    #       const requiredChecks = context.repo.pull.status.filter(check => check.context === 'required');
+    #       const failedChecks = requiredChecks.filter(check => check.state === 'failure');
+    #       if (failedChecks.length > 0) {
+    #         console.log('Failed checks:');
+    #         failedChecks.forEach(check => console.log(check.context, check.state, check.description));
+    #         setFailed('Failed checks found.');
+    #       }
 
 
