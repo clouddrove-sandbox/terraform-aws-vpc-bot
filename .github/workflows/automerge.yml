@@ -31,28 +31,10 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
   automerge:
-    name: automerge PR
     runs-on: ubuntu-latest
-    needs: autoapprove
     steps:
-      - name: Wait for all checks to pass
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { data: checksResponse.check_runs } = await github.rest.checks.listForRef({
-              ...context.repo,
-              ref: context.payload.pull_request.head.sha,
-            });
-
-            const allChecksPassed = checksResponse.check_runs.every((check) => check.conclusion === 'success');
-
-            if (!allChecksPassed) {
-              console.log('Not all checks have passed. Exiting.');
-              process.exit(78); // Exit code 78 indicates a neutral result
-            }
-
-      - name: automerge
+      - id: automerge
+        name: automerge
         uses: pascalgn/automerge-action@v0.15.6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
