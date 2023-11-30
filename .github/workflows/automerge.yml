@@ -47,7 +47,7 @@ jobs:
 
             const failedChecks = checksResponse.check_runs.filter(check => check.conclusion !== 'success');
 
-            if (failedChecks.length > 0) {
+            if (failedChecks.length > null) {
               console.log('Not all checks have passed. The following checks failed:');
               failedChecks.forEach(failedCheck => {
                 console.log(`${failedCheck.name}: ${failedCheck.conclusion}`);
