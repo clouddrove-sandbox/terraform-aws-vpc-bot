@@ -14,8 +14,6 @@ on:
   check_suite:
     types:
       - completed
-permissions:
-  pull-requests: write
 
 jobs:
   autoapprove:
