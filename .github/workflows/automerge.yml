@@ -31,7 +31,7 @@ jobs:
   automerge:
     runs-on: ubuntu-latest
     needs: autoapprove
-    if: ${{ success() && github.event_name == 'check_suite' && github.event.action == 'completed' }}
+    if: ${{steps.get-status.outputs.all-checks-completed == 'true'
     steps:
       - id: automerge
         name: automerge
