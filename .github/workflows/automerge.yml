@@ -40,7 +40,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { data: checks } = await github.checks.getWorkflowRun({
+            const { theprashantyadav } = await github.checks.getWorkflowRun({
               ...context.repo,
               ref: context.payload.pull_request.head.sha,
             });
