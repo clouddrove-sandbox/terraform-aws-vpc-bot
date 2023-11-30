@@ -19,7 +19,6 @@ jobs:
   autoapprove:
     name: Auto Approve a PR by dependabot
     runs-on: ubuntu-latest
-    if: ${{ success() && github.event_name == 'check_suite' && github.event.action == 'completed' }}
     steps:
       - name: Auto approve
         uses: hmarr/auto-approve-action@v3.2.1
