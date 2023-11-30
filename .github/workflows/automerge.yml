@@ -48,7 +48,6 @@ jobs:
             console.log('Not all checks have passed. Exiting.');
             process.exit(78); // Exit code 78 indicates a neutral result
           }
-
       - name: Automerge
         uses: pascalgn/automerge-action@v0.15.6
         env:
