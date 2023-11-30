@@ -19,6 +19,7 @@ jobs:
   autoapprove:
     name: Auto Approve a PR by dependabot
     runs-on: ubuntu-latest
+    if: ${ github.event_name == 'pull_request' }
     steps:
       - name: Auto approve
         uses: hmarr/auto-approve-action@v3.2.1
