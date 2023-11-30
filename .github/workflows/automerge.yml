@@ -11,7 +11,7 @@ on:
       - ready_for_review
       - reopened
       - unlocked
-  check_suite:
+  check_run:
     types:
       - completed
 
