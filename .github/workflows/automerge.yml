@@ -40,8 +40,8 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const github.rest.actions.listWorkflowRunArtifacts({
-              ...context.repo,
+            const checksResponse = await github.checks.listForRef({
+            ...context.repo,
               ref: context.payload.pull_request.head.sha,
             });
 
