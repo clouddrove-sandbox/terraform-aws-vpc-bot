@@ -15,10 +15,23 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
+auto_merge_if_checks_pass:
+    needs: auto_merge
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Auto Merge if checks pass
+        if: ${{ needs.auto_merge.outputs.success == 'true' }}
+        run: |
+          # Your auto-merge logic here
+          # For example, using Git commands to merge the pull request
+          git checkout master
+          git merge ${{ github.event.before }}
+
   automerge:
     runs-on: ubuntu-latest
 #    needs: autoapprove
-    if: ${{ success() && github.event_name == 'check_suite' && github.event.action == 'completed' }}
+#    if: ${{ success() && github.event_name == 'check_suite' && github.event.action == 'completed' }}
     steps:
       - id: automerge
         name: automerge
