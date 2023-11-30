@@ -2,7 +2,6 @@ name: Auto approve and merge PRs by dependabot
 
 on:
   pull_request:
-  check_run:
 
 jobs:
   autoapprove:
@@ -15,6 +14,7 @@ jobs:
         if: github.actor == 'theprashantyadav'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          event-type: checks-complete
 
   automerge:
     runs-on: ubuntu-latest
