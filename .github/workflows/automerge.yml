@@ -45,12 +45,15 @@ jobs:
               ref: context.payload.pull_request.head.sha,
             });
 
-            const allChecksPassed = checksResponse.data.check_runs.every(check => check.conclusion === 'success');
+            const failedChecks = checksResponse.data.check_runs.filter(check => check.conclusion !== 'success');
 
-            if (!allChecksPassed) {
-              console.log('Not all checks have passed. Exiting.');
-              process.exit(78); // Exit code 78 indicates a neutral result
-            }
+            if (failedChecks.length > 0) {
+            console.log('Not all checks have passed. The following checks failed:');
+            failedChecks.forEach(failedCheck => {
+            console.log(`${failedCheck.name}: ${failedCheck.conclusion}`);
+          });
+            process.exit(78); // Exit code 78 indicates a neutral result
+          }
 
       - name: automerge
         uses: pascalgn/automerge-action@v0.15.6
