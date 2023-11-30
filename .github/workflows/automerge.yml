@@ -47,7 +47,7 @@ jobs:
 
             const allChecksPassed = checksResponse.check_runs.every((check) => check.conclusion === 'success');
             const myObject = {
-          propertyName: 'terraform-aws-vpc-bot',
+          propertyName: terraform-aws-vpc-bot,
           };
 
             if (!allChecksPassed) {
