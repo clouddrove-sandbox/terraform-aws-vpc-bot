@@ -1,4 +1,4 @@
-name: Auto Approve and Merge PRs
+name: Auto approve and merge PRs by dependabot
 
 on:
   pull_request:
@@ -13,10 +13,7 @@ on:
       - unlocked
   check_run:
     types:
-      - completed
-
-permissions:
-  pull-requests: write
+      - [ completed ]
 
 jobs:
   autoapprove:
