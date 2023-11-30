@@ -24,9 +24,6 @@ jobs:
         name: automerge
         uses: pascalgn/automerge-action@v0.15.6
         if: ${{ needs.auto_merge.outputs.success == 'true' }}
-        run: |
-          git checkout master
-          git merge ${{ github.event.before }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_FILTER_AUTHOR: 'theprashantyadav'
