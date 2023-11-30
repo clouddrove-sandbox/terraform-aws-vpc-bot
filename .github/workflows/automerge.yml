@@ -1,38 +1,31 @@
-name: Dependabot auto-approve
+name: Auto approve and merge PRs by dependabot
+
 on:
-  workflow_call:
-    inputs:
-      PR_URL:
-        description: 'Dynamic URL of Pull Request.'
-        required: true
-        type: string
-    secrets:
-      GITHUB:
-        description: 'Your GitHub token for authentication.'
-        required: true
-permissions:
-  contents: write
-  pull-requests: write
+  pull_request:
+  check_run:
+
 jobs:
-  dependabot:
-    if: github.actor == 'dependabot[bot]'
+  autoapprove:
+    name: Auto Approve a PR by dependabot
     runs-on: ubuntu-latest
     steps:
-      - name: Dependabot metadata
-        id: metadata
-        uses: dependabot/fetch-metadata@v1
+      - name: Auto approve
+        uses: hmarr/auto-approve-action@v3.2.1
+        # Perform the auto approve action only when the PR is raised by dependabot
+        if: github.actor == 'theprashantyadav'
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Approve a PR
-        run: gh pr review --approve "$PR_URL"
-        env:
-          PR_URL: ${{ inputs.PR_URL }}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
-      - name: Enable auto-merge for Dependabot PRs
-        # if: contains(steps.metadata.outputs.dependency-names, 'my-dependency') && steps.metadata.outputs.update-type == 'version-update:semver-patch'
-        run: gh pr merge --auto --merge "$PR_URL"
-        env:
-          PR_URL: ${{ inputs.PR_URL }}
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
 
-
+  automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - id: automerge
+        name: automerge
+        uses: pascalgn/automerge-action@v0.15.6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          MERGE_FILTER_AUTHOR: 'theprashantyadav'
+          MERGE_METHOD: "merge"
+          MERGE_DELETE_BRANCH: "true"
+          MERGE_LABELS: "dependencies,automerge"
+          MERGE_REQUIRED_APPROVALS: ""
