@@ -5,9 +5,9 @@ on:
     workflows: ["Auto Assign PRs", "changelog", "tf-checks", "tfsec", "Create README.md file"]
     types:
       - completed
-#jobs:
-#  check:
-#    runs-on: ubuntu-latest
+jobs:
+  check:
+    runs-on: ubuntu-latest
 #    steps:
 #      - name: Checkout code
 #        uses: actions/checkout@v2
