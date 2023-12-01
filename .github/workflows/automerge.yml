@@ -1,8 +1,10 @@
 name: Dependabot auto-approve
 on:
-  check_suite:
+  pull_request:
     types:
-      - completed
+      - synchronize
+      - opened
+      - reopened
 
 permissions:
   contents: write
