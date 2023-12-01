@@ -3,24 +3,13 @@ name: Auto approve and merge PRs by dependabot
 on:
   pull_request:
     types:
+      - labeled
       - synchronize
-      - opened
-      - reopened
-  check_suite:
-    types:
-      - completed
+
+permissions:
+  pull-requests: write
+
 jobs:
-  get-status:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get Status of current ref
-        id: get-status
-        uses: danieldeichfuss/get-status@v0.0.10
-        with:
-          ref: ${{ github.sha }}
-      - name: Deploy to Production
-        if: ${{steps.get-status.outputs.all-checks-completed == 'true' &&  steps.get-status.outputs.all-checks-passed == 'true'}}
-        run: echo "Deploying to production"
   autoapprove:
     name: Auto Approve a PR by dependabot
     runs-on: ubuntu-latest
@@ -32,11 +21,38 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
   automerge:
+    name: Automerge Dependabot PR
     runs-on: ubuntu-latest
     needs: autoapprove
+    if: success() && github.event_name == 'pull_request'
     steps:
-      - id: automerge
-        name: automerge
+      - name: Wait for all checks to pass
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const { data: checksResponse } = await github.checks.listForRef({
+            ...context.repo,
+            ref: context.payload.pull_request.head.sha,
+          });
+
+          const incompleteChecks = checksResponse.check_runs.filter(check => check.conclusion === null);
+
+          if (incompleteChecks.length > 0) {
+            console.log('Not all checks have completed. Exiting.');
+            process.exit(78); // Exit code 78 indicates a neutral result
+          }
+
+          const failedChecks = checksResponse.check_runs.filter(check => check.conclusion !== 'success');
+
+          if (failedChecks.length > 0) {
+            console.log('The following checks failed:');
+            failedChecks.forEach(failedCheck => {
+              console.log(`${failedCheck.name}: ${failedCheck.conclusion}`);
+            });
+            process.exit(78); // Exit code 78 indicates a neutral result
+          }
+      - name: Automerge
         uses: pascalgn/automerge-action@v0.15.6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
