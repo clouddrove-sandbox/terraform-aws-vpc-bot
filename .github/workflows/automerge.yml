@@ -1,11 +1,6 @@
 name: Auto approve and merge PRs by dependabot
 
 on:
-  pull_request:
-    types:
-      - synchronize
-      - opened
-      - reopened
   check_suite:
     types:
       - completed
