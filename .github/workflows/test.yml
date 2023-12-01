@@ -5,16 +5,11 @@ on:
     workflows: ["Auto Assign PRs", "changelog", "tf-checks", "tfsec", "Create README.md file"]
     types:
       - completed
-
 jobs:
   check_workflow_status:
     runs-on: ubuntu-latest
-
     steps:
       - name: Check Workflow Status
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
         run: |
-          # Check the status of each workflow
-          for workflow in "Auto Assign PRs" "changelog" "tf-checks" "tfsec" "Create README.md file"; do
-            status=$(gh api repos/:owner/:repo/actions/workflows/"$workflow"/runs/latest | jq -r .conclusion)
-            echo "Workflow $workflow has status: $status"
-          done
+          echo "The triggering workflow was successful!"
