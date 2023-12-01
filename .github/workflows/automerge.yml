@@ -4,10 +4,6 @@ on:
   check_suite:
     types:
       - completed
-
-permissions:
-  pull-requests: write
-
 jobs:
   autoapprove:
     name: Auto Approve a PR by dependabot
@@ -35,5 +31,3 @@ jobs:
           MERGE_DELETE_BRANCH: "true"
           MERGE_LABELS: "dependencies,automerge"
           MERGE_REQUIRED_APPROVALS: ""
-
-
