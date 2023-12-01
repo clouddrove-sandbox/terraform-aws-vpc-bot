@@ -1,7 +1,10 @@
 name: Auto approve and merge PRs by dependabot
 on:
   pull_request:
-jobs:
+    types:
+      - synchronize
+      - opened
+      - reopenedjobs:
   autoapprove:
     name: Auto Approve a PR by dependabot
     runs-on: ubuntu-latest
