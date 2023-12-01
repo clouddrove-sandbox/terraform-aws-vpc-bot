@@ -18,12 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor == 'theprashantyadav'
     steps:
-      - name: Auto Merge if checks pass
-        if: ${{ needs.auto_merge.outputs.success == 'true' }}
-        run: |
-          git checkout master
-          git merge ${{ github.event.before }}
-
+      - name: Debug Outputs
+          run: |
+            echo "all-checks-completed: ${{ steps.get-status.outputs.all-checks-completed }}"
+            echo "all-checks-passed: ${{ steps.get-status.outputs.all-checks-passed }}"
       - name: Approve a PR
         run: gh pr review --approve "$PR_URL"
         env:
