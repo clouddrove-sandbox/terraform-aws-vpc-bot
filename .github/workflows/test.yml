@@ -16,8 +16,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Run a simple check
-        run: echo "Checking..."
+        uses: LouisBrunner/checks-action@v1.6.1
 
