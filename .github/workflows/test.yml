@@ -5,11 +5,9 @@ on:
     workflows: ["Auto Assign PRs", "changelog", "tf-checks", "tfsec", "Create README.md file"]
     types:
       - completed
-
 jobs:
   check_workflow_status:
     runs-on: ubuntu-latest
-
     steps:
       - name: Check Workflow Status
         if: ${{ github.event.workflow_run.conclusion == 'success' }}
