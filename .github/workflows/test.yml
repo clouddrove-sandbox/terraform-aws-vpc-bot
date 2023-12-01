@@ -1,4 +1,4 @@
-name: run checks
+name: Run Checks
 
 on:
   workflow_run:
@@ -6,3 +6,15 @@ on:
     types:
       - completed
 
+jobs:
+  check_workflow_status:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check Workflow Status
+        run: |
+          # Check the status of each workflow
+          for workflow in "Auto Assign PRs" "changelog" "tf-checks" "tfsec" "Create README.md file"; do
+            status=$(gh api repos/:owner/:repo/actions/workflows/"$workflow"/runs/latest | jq -r .conclusion)
+            echo "Workflow $workflow has status: $status"
+          done
