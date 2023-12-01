@@ -6,7 +6,7 @@ on:
       - opened
       - reopened
   workflow_run:
-    workflows: ["Auto Assign PRs", "changelog", "tf-checks", "tfsec"]
+    workflows: ["Auto Assign PRs", "changelog", "tf-checks", "tfsec", "Create README.md file"]
     types:
       - completed
 jobs:
