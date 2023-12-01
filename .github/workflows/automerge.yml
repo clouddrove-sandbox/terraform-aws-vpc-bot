@@ -23,8 +23,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_FILTER_AUTHOR: 'theprashantyadav'
           MERGE_METHOD: "merge"
-#          MERGE_DELETE_BRANCH: "true"
-#          MERGE_LABELS: "dependencies,automerge"
-#          MERGE_REQUIRED_APPROVALS: ""
+          MERGE_DELETE_BRANCH: "true"
+          MERGE_LABELS: "dependencies,automerge"
+          MERGE_REQUIRED_APPROVALS: ""
 
 
