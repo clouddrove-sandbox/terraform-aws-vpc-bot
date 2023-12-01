@@ -5,7 +5,6 @@ on:
       - synchronize
       - opened
       - reopened
-
 jobs:
   autoapprove:
     name: Auto Approve a PR by dependabot
