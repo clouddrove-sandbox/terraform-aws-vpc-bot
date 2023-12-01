@@ -13,7 +13,7 @@ jobs:
   test-packages:
     runs-on: ubuntu-latest
     steps:
+      - name: tfsec commenter for PR
       - uses: actions/checkout@v1
-      - name: test packages
-        env:
-          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB}}
