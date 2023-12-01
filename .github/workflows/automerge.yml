@@ -29,7 +29,6 @@ jobs:
 
   automerge:
     runs-on: ubuntu-latest
-    if: ${{ success() && github.event_name == 'check_suite' }}
     steps:
       - id: automerge
         name: automerge
