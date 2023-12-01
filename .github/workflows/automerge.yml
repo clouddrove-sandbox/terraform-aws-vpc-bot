@@ -10,6 +10,9 @@ on:
     types:
       - completed
 
+permissions:
+  pull-requests: write
+
 jobs:
   autoapprove:
     name: Auto Approve a PR by dependabot
