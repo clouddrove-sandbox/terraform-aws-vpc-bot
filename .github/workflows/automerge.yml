@@ -5,7 +5,8 @@ on:
       - synchronize
       - opened
       - reopened
-
+  workflow_run:
+    workflows: [ "Auto Assign PRs", "changelog", "tf-checks", "tfsec", "Create README.md file" ]
 jobs:
   autoapprove:
     name: Auto Approve a PR by dependabot
