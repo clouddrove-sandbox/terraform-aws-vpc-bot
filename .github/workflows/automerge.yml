@@ -1,5 +1,6 @@
 name: Auto approve and merge PRs by dependabot
 on:
+  pull_request:
   workflow_run:
     workflows: ["Auto Assign PRs", "changelog", "tf-checks", "tfsec", "Create README.md file"]
     types:
