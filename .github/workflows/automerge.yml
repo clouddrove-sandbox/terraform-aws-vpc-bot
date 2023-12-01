@@ -1,11 +1,10 @@
 name: Auto approve and merge PRs by dependabot
 on:
   pull_request:
+  workflow_run:
+    workflows: ["Auto Assign PRs", "changelog", "tf-checks", "tfsec", "Create README.md file"]
     types:
-      - synchronize
-      - opened
-      - reopened
-
+      - completed
 jobs:
   autoapprove:
     name: Auto Approve a PR by dependabot
@@ -19,7 +18,7 @@ jobs:
 
   automerge:
     runs-on: ubuntu-latest
-#    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - id: automerge
         name: automerge
@@ -28,6 +27,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_FILTER_AUTHOR: 'theprashantyadav'
           MERGE_METHOD: "merge"
-          MERGE_DELETE_BRANCH: "false"
+          MERGE_DELETE_BRANCH: "true"
           MERGE_LABELS: "dependencies,automerge"
           MERGE_REQUIRED_APPROVALS: ""
+
+
