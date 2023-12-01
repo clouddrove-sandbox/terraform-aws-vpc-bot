@@ -5,16 +5,12 @@ on:
       - synchronize
       - opened
       - reopened
-  workflow_run:
-    workflows: ["Auto Assign PRs", "changelog", "tf-checks", "tfsec", "Create README.md file"]
-    types:
-      - completed
 
 jobs:
   autoapprove:
     name: Auto Approve a PR by dependabot
     runs-on: ubuntu-latest
-#    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Auto approve
         uses: hmarr/auto-approve-action@v3.2.1
@@ -24,7 +20,7 @@ jobs:
 
   automerge:
     runs-on: ubuntu-latest
-#    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - id: automerge
         name: automerge
