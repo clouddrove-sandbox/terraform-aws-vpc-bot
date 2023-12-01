@@ -18,6 +18,7 @@ jobs:
 
   automerge:
     runs-on: ubuntu-latest
+    if: ${{ success() && github.event_name == 'Run Checks' && github.event.action == 'workflow_run' }}
     steps:
       - id: automerge
         name: automerge
@@ -26,7 +27,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           MERGE_FILTER_AUTHOR: 'theprashantyadav'
           MERGE_METHOD: "merge"
-          MERGE_DELETE_BRANCH: "false"
+          MERGE_DELETE_BRANCH: "true"
           MERGE_LABELS: "dependencies,automerge"
           MERGE_REQUIRED_APPROVALS: ""
 
