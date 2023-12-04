@@ -1,15 +1,12 @@
-name: Run Checks
-
+name: Release
 on:
   workflow_run:
-    workflows: ["Auto Assign PRs", "changelog", "tf-checks", "tfsec", "Create README.md file"]
+    workflows: ["Run Tests"]
+    branches: [main]
     types:
       - completed
 jobs:
-  check_workflow_status:
-    runs-on: ubuntu-latest
+  deploy-packages:
+    # the 2nd condition
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    steps:
-      - name: Check Workflow Status
-        run: |
-          echo "The triggering workflow was successful!"
+    (...)
