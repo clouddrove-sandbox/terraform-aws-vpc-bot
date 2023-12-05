@@ -10,7 +10,7 @@ jobs:
   autoapprove:
     name: Auto Approve a PR by dependabot
     runs-on: ubuntu-latest
-    if: github.actor == 'dependabot[bot]'
+    if: github.actor == 'theprashantyadav'
     steps:
       - name: wait for other checks to complete
         run: |
