@@ -10,11 +10,11 @@ jobs:
   autoapprove:
     name: Auto Approve a PR by dependabot
     runs-on: ubuntu-latest
-    if: github.actor == 'theprashantyadav'
+    if: github.actor == 'dependabot[bot]'
     steps:
       - name: wait for other checks to complete
         run: |
-          sleep 80
+          sleep 50
 
       - name: Get Status of current PR
         id: get-status
@@ -46,8 +46,9 @@ jobs:
         if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          MERGE_FILTER_AUTHOR: 'theprashantyadav'
+          MERGE_FILTER_AUTHOR: 'dependabot[bot]'
           MERGE_METHOD: "merge"
           MERGE_DELETE_BRANCH: "true"
           MERGE_LABELS: "dependencies,automerge"
           MERGE_REQUIRED_APPROVALS: ""
+
