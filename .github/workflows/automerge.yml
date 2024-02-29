@@ -2,7 +2,7 @@
 name: Automerge
 
 on:
-  workflow_call:
+  pull_request:
     inputs:
       tfcheck:
         description: 'Enter the tfcheck action name.'
