@@ -1,6 +1,18 @@
 ## Describe your changes
 
+added pull request template 
+
+## Bug description
+
+Clearly and concisely describe the problem. 
+
 ## Issue ticket number and link
+
+there was no issue
+
+## Solution description 
+
+describe your code changes in detail for reviewers. Explain the technical solution you have provided and how it fixes the issue case.
 
 ## Checklist before requesting a review
 - [ ] I have performed a self-review of my code
