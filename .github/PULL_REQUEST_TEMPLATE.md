@@ -1,12 +1,24 @@
-## what
-* Describe high-level what changed as a result of these commits (i.e. in plain-english, what do these changes mean?)
-* Use bullet points to be concise and to the point.
+THIS PROJECT IS IN MAINTENANCE MODE. We accept pull requests for Bug Fixes **ONLY**. NO NEW FEATURES ACCEPTED!
 
-## why
-* Provide the justifications for the changes (e.g. business case).
-* Describe why these changes were made (e.g. why do these commits fix the problem?)
-* Use bullet points to be concise and to the point.
+<!--- Provide a general summary of your changes in the Title above -->
 
-## references
-* Link to any supporting jira issues or helpful documentation to add some context (e.g. stackoverflow).
-* Use `closes #123`, if this PR closes a Jira issue `#123`
+## Description
+<!--- Describe your changes in detail -->
+
+## Related Issue
+<!--- This project only accepts pull requests related to open issues -->
+<!--- If suggesting a new feature or change, please discuss it in an issue first -->
+<!--- If fixing a bug, there should be an issue describing it with steps to reproduce -->
+<!--- Please link to the issue here: -->
+
+## Motivation and Context
+<!--- Why is this change required? What problem does it solve? -->
+<!--- If it fixes an open issue, please link to the issue here. -->
+
+## How Has This Been Tested?
+<!--- Please describe in detail how you tested your changes. -->
+<!--- Include details of your testing environment, and the tests you ran to -->
+<!--- see how your change affects other areas of the code, etc. -->
+
+## Screenshots (if appropriate):
+
