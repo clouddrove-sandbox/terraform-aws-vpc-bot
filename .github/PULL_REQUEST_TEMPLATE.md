@@ -59,7 +59,6 @@ describe your code changes in detail for reviewers. Explain the technical soluti
 - [ ] Do we need to implement analytics?
 - [ ] Will this be part of a product update? If yes, please write one phrase about this update.
 
-
 ## **Added/updated tests?**
 We encourage you to keep the code coverage percentage at 80% and above.
 
