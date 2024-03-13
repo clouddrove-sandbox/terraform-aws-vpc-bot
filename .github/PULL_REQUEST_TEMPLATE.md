@@ -1,25 +1,3 @@
-<!--
-     For Work In Progress Pull Requests, please use the Draft PR feature,
-     see https://github.blog/2019-02-14-introducing-draft-pull-requests/ for further details.
-
-     For a timely review/response, please avoid force-pushing additional
-     commits if your PR already received reviews or comments.
-
-     Before submitting a Pull Request, please ensure you've done the following:
-     - 📖 Read the Forem Contributing Guide: https://developers.forem.com/contributing-guide/forem#create-a-pull-request
-     - 📖 Read the Forem Code of Conduct: https://github.com/forem/forem/blob/main/CODE_OF_CONDUCT.md
-     - 👷‍♀️ Create small PRs. In most cases this will be possible.
-     - ✅ Provide tests for your changes.
-     - 📝 Use descriptive commit messages.
-     - 📗 Update any related documentation and include any relevant screenshots.
-
-     NOTE: Pull Requests from forked repositories will need to be reviewed by
-     a Forem Team member before any CI builds will run. Once your PR is approved
-     with a `/ci` reply to the PR, it will be allowed to run subsequent builds without
-     manual approval.
--->
-
-
 ## Describe your changes
 added pull request template
 
@@ -58,7 +36,6 @@ describe your code changes in detail for reviewers. Explain the technical soluti
 - [ ] If it is a core feature, I have added thorough tests.
 - [ ] Do we need to implement analytics?
 - [ ] Will this be part of a product update? If yes, please write one phrase about this update.
-
 
 ## **Added/updated tests?**
 We encourage you to keep the code coverage percentage at 80% and above.
