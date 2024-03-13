@@ -2,7 +2,7 @@
 added pull request template
 
 ## **What type of PR is this? (check all applicable)**
-- [ ] Refactor
+- [yes] Refactor
 - [ ] Feature
 - [ ] Bug Fix
 - [ ] Optimization
